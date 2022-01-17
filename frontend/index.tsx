@@ -88,7 +88,7 @@ class Selected extends Component<Props, State>
         const optionList = [
             { label: "Select a record", value: undefined, disabled: true },
             { label: "Display all", value: "ALL" },
-            ...options
+            ...([...options].reverse())
         ];
         return (
             <div style={{ maxWidth: "632px", margin: "1rem auto" }}>

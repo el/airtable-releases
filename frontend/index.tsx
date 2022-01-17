@@ -46,7 +46,7 @@ class App extends Component<{}, State>
         const { table } = this.state;
         return (
             <div style={{ padding: "1rem" }}>
-                <TablePicker table={table} onChange={t => this.handleTablePicker(t)}/>
+                {/* <TablePicker table={table} onChange={t => this.handleTablePicker(t)}/> */}
                 {table && <Selected key={table.id} table={table}/>}
             </div>
         )

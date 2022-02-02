@@ -90,8 +90,10 @@ class Selected extends Component<Props, State>
             { label: "Display all", value: "ALL" },
             ...([...options].reverse())
         ];
+        const released = ["major", "minor"];
+        const unreleased = ["release-candidate", "in-development"];
         return (
-            <div style={{ maxWidth: "632px", margin: "1rem auto" }}>
+            <div style={{ maxWidth: "700px", margin: "1rem auto" }}>
                 <Select
                     style={{float: "right"}}
                     options={optionList}
@@ -103,8 +105,13 @@ class Selected extends Component<Props, State>
                 />
                 <h1>{table.name} {displayAll ? "All" : record ? "-" : ""}</h1>
                 {(!!record || !!displayAll) && <Template key={`${Math.random()}`} releases={displayAll ? records : [record]} />}
-                {!!record && !displayAll && <Release key={record.id} record={record} />}
-                {!!displayAll && records.map(rec => <Release key={rec.id} record={rec} />)}
+                {!!record && !displayAll && <Release key={record.id} record={record} types={[...released, ...unreleased]} />}
+                <h2>Unreleased:</h2>
+                    {!!displayAll && records.map(rec => <Release key={rec.id} record={rec} types={unreleased}/>)}
+                <h2>Released:</h2>
+                <div id='release-notes'>
+                    {!!displayAll && records.map(rec => <Release key={rec.id} record={rec} types={released}/>)}
+                </div>
             </div>
         );
     }
